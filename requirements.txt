@@ -2,3 +2,7 @@ langraph
 langchain-google-genai
 dotenv
 praw
+langchain-core
+selenium
+undetected-chromedriver
+fake-useragent
