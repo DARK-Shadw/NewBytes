@@ -1,3 +1,4 @@
 langraph
 langchain-google-genai
 dotenv
+praw
