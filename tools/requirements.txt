@@ -1,0 +1,4 @@
+langchain-core
+selenium
+undetected-chromedriver
+fake-useragent
