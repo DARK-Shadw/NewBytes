@@ -146,29 +146,30 @@ class NewsScraperAgent:
         response = self.llm.invoke(message)
         return {"chosen_post": response.content}
 
-        def choose_type(self, state: State):
-            topic = state["topic"]
-            chosen_post = state["chosen_post"]
-            message = [
-                (
-                    "system",
-                    f"""You are an expert in social media marketing and content creation. Your task is to analyze the chosen post and determine the type of social media post that would be most effective for the topic: {topic}.
-                    You should consider the content of the post, the target audience, and the platform where the post will be shared.
-                    Based on your analysis, you should return a single type of social media post that would be most effective for the topic.
-                    The output should be in this format:
-                    example:
-                        Type: [type of social media post].
+    def choose_type(self, state: State):
+        topic = state["topic"]
+        chosen_post = state["chosen_post"]
+        message = [
+            (
+                "system",
+                f"""You are an expert in social media marketing and content creation. Your task is to analyze the chosen post and determine the type of social media post that would be most effective for the topic: {topic}.
+                You should consider the content of the post, the target audience, and the platform where the post will be shared.
+                Based on your analysis, you should return a single type of social media post that would be most effective for the topic.
+                The output should be in this format:
+                example:
+                    Type: [type of social media post].
 
-                    !! important do not add any unnecessary text only explain what type of post should be made based on the post and the topic.
-                    """,
-                ),
-                (
-                    "human",
-                    f"Analyze the chosen post and determine the type of social media post that would be most effective for the topic: {topic}. Here is the chosen post:\n\n{chosen_post}",
-                )
-            ]
-            responce = self.llm.invoke(message)
-            return {"post_type": responce.content}
+                !! important do not add any unnecessary text only explain what type of post should be made based on the post and the topic.
+                """,
+            ),
+            (
+                "human",
+                f"Analyze the chosen post and determine the type of social media post that would be most effective for the topic: {topic}. Here is the chosen post:\n\n{chosen_post}",
+            )
+        ]
+        responce = self.llm.invoke(message)
+        return {"post_type": responce.content}
+        
 def main():
     model = ChatGoogleGenerativeAI(
         model="gemini-2.0-flash",
